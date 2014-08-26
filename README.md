@@ -1,4 +1,10 @@
-elevator
+Elevator
 ========
 
-Browser-based elevator simulation
+A browser-based elevator simulation.
+
+Setup
+-----
+
+    bower install
+    open index.html
