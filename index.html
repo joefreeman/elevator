@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Elevator</title>
+  <link rel="stylesheet" type="text/css" href="app/style.css">
+</head>
+<body>
+  <div class="container"></div>
+  <div class="about">
+    <a href="http://joef.co.uk">Joe Freeman</a> &middot; <a href="https://github.com/joefreeman/elevator">GitHub</a>
+  </div>
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+
+  <script src="app/init.js"></script>
+  <script src="app/model/observable.js"></script>
+  <script src="app/model/person.js"></script>
+  <script src="app/model/elevator.js"></script>
+  <script src="app/model/building.js"></script>
+  <script src="app/model/world.js"></script>
+  <script src="app/strategy/elevator/random.js"></script>
+  <script src="app/strategy/elevator/dumb.js"></script>
+  <script src="app/view/dom/world.js"></script>
+
+  <script>
+    var buildings = [];
+    for (var i = 0; i < 8; i++) {
+      buildings.push(new App.Model.Building({
+        numFloors: Math.floor(Math.random() * 8) + 2,
+        width: Math.floor(Math.random() * 100) + 50,
+        floorHeight: Math.floor(Math.random() * 25) + 30
+      }));
+    }
+    var randomTarget = function() {
+      var building = buildings[Math.floor(Math.random() * buildings.length)];
+      return {
+        offset: Math.floor(Math.random() * building.width),
+        building: building,
+        floor: Math.floor(Math.random() * building.numFloors)
+      };
+    }
+    var randomPerson = function() {
+      return new App.Model.Person({
+        speed: (Math.random() * 0.09) + 0.01,
+        position: {
+          offset: Math.random() * $(window).width()
+        },
+        target: randomTarget(),
+        callback: function(person) {
+          person.target = randomTarget();
+        }
+      });
+    }
+    var people = [];
+    for (var i = 0; i < 10; i++) {
+      people.push(randomPerson());
+    }
+    var world = new App.Model.World({
+      buildings: buildings,
+      people: people
+    });
+
+    var view = new App.View.Dom.World(world, $('.container'));
+    view.render();
+
+    for (var i = 0; i < world.buildings.length; i++) {
+      var elevator = world.buildings[i].elevator;
+      elevator.strategy = new App.Strategy.Elevator.Dumb(elevator);
+    }
+
+    var lastUpdateTime = Date.now();
+    setInterval(function() {
+      if (window.running) {
+        var startTime = Date.now();
+        world.tick(startTime - lastUpdateTime);
+        lastUpdateTime = startTime;
+      }
+    }, 50);
+
+    window.running = true;
+    window.world = world;
+  </script>
+</body>
+</html>

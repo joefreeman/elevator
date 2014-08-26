@@ -1,0 +1,145 @@
+body {
+  background: #111;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  color: #FFF;
+}
+
+a {
+  color: #FFF;
+}
+
+.container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+}
+
+.about {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+}
+
+.popup {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  z-index: 10;
+}
+
+.popup .close {
+  float: right;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.popup dl {
+  margin: 0;
+}
+
+.world {
+  position: relative;
+  background: #249;
+  border-bottom: 2px solid #FFF;
+  box-sizing: border-box;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.building {
+  position: absolute;
+  bottom: 0;
+  border: 4px solid #FFF;
+  border-width: 4px 4px 0 4px;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.building:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.building.selected {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.floor {
+  border-bottom: 2px solid #CCC;
+  box-sizing: border-box;
+}
+
+.floor:last-child {
+  border-bottom: none;
+}
+
+.shaft {
+  background-color: rgba(50, 100, 200, 0.5);
+  border-left: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.elevator {
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  width: 100%;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  box-sizing: border-box;
+}
+
+.elevator .door {
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  height: 100%;
+  top: 0;
+  border-left: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+  box-sizing: border-box;
+}
+
+.person {
+  height: 20px;
+  width: 2px;
+  background: #FFF;
+  position: absolute;
+  z-index: 3;
+}
+
+.target {
+  height: 4px;
+  width: 4px;
+  background: #FFF;
+  position: absolute;
+  z-index: 2;
+}
+
+.direction {
+  position: absolute;
+  border: 1px dashed #AAF;
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+.direction-ne,
+.direction-sw {
+  border-width: 1px 0 0 1px;
+}
+
+.direction-se,
+.direction-nw {
+  border-width: 1px 1px 0 0;
+}
