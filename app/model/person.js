@@ -1,4 +1,3 @@
-var BUILDING_ENTRANCE_OFFSET = 50;
 var BUILDING_ELEVATOR_OFFSET = 20;
 var ELEVATOR_DOOR_OFFSET = 5;
 
@@ -84,8 +83,8 @@ App.Model.Person.prototype.tick = function(world, elapsedTime) {
           console.log('Got out of the down elevator.', this);
         }
       } else if (this.position.floor == 0) {
-        if (movePersonTowards(this, BUILDING_ENTRANCE_OFFSET, elapsedTime)) {
-          this.position.offset = this.position.building.getLeft(world.buildings) + BUILDING_ENTRANCE_OFFSET;
+        if (movePersonTowards(this, this.position.building.entranceOffset, elapsedTime)) {
+          this.position.offset = this.position.building.getLeft(world.buildings) + this.position.building.entranceOffset;
           this.position.building = null;
           this.position.floor = null;
           console.log('Got to the building exit.');
@@ -110,11 +109,11 @@ App.Model.Person.prototype.tick = function(world, elapsedTime) {
       }
     } else {
       // TODO: better way to share these constants?
-      var buildingOffset = this.target.building.getLeft(world.buildings) + BUILDING_ENTRANCE_OFFSET;
+      var buildingOffset = this.target.building.getLeft(world.buildings) + this.target.building.entranceOffset;
       if (movePersonTowards(this, buildingOffset, elapsedTime)) {
         this.position.building = this.target.building;
         this.position.floor = 0;
-        this.position.offset = BUILDING_ENTRANCE_OFFSET;
+        this.position.offset = this.target.building.entranceOffset;
         console.log('Got to building entrance.');
       }
     }

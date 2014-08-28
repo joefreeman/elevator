@@ -2,6 +2,8 @@ var BUILDING_SEPARATION = 60;
 var SHAFT_WIDTH = 20;
 var ELEVATOR_OFFSET = 10;
 var WORLD_PADDING = 50;
+var ENTRANCE_WIDTH = 16;
+var ENTRANCE_HEIGHT = 30;
 
 App.View.Dom.World = function(model, container) {
   this.model = model;
@@ -107,12 +109,17 @@ var renderBuilding = function(building, buildings, worldEl, containerEl) {
   });
   elevatorEl.append(leftDoorEl, rightDoorEl);
   shaftEl.append(elevatorEl);
+  var entranceEl = $('<div>').addClass('entrance').css({
+    height: ENTRANCE_HEIGHT,
+    left: building.entranceOffset - ENTRANCE_WIDTH / 2,
+    width: ENTRANCE_WIDTH
+  });
   buildingEl.on('click', function() {
     hidePopup(containerEl);
     showBuildingPopup(building, containerEl);
     buildingEl.addClass('selected');
   });
-  buildingEl.append(floorsEl, shaftEl);
+  buildingEl.append(floorsEl, shaftEl, entranceEl);
   worldEl.append(buildingEl);
 }
 
