@@ -1,3 +1,5 @@
+var BUILDING_SEPARATION = 60;
+
 App.Model.Building = function(config) {
   this.width = config.width || 100;
   this.entranceOffset = config.entranceOffset || this.width - 20;
