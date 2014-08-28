@@ -28,7 +28,7 @@ App.Model.Elevator.prototype.areDoorsOpen = function() {
 }
 
 var moveElevator = function(elevator, amount) {
-  elevator.floor = Math.max(Math.min(elevator.floor + amount, elevator.building.numFloors - 1), 0);
+  elevator.floor = App.Utils.clamp(elevator.floor + amount, 0, elevator.building.numFloors - 1);
   elevator.observable.trigger('moved');
   for (var i = 0; i < elevator.passengers.length; i++) {
     elevator.passengers[i].observable.trigger('moved');
@@ -36,7 +36,7 @@ var moveElevator = function(elevator, amount) {
 }
 
 var updateDoors = function(elevator, amount) {
-  elevator.doors.position = Math.min(Math.max(elevator.doors.position + amount, -1), DOOR_WAIT);
+  elevator.doors.position = App.Utils.clamp(elevator.doors.position + amount, -1, DOOR_WAIT);
   elevator.observable.trigger('moved'); // TODO: different event?
 }
 

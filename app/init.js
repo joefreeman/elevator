@@ -1,4 +1,5 @@
 App = {};
+App.Utils = {};
 App.Model = {};
 App.Strategy = {};
 App.Strategy.Elevator = {};

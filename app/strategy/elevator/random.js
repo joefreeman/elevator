@@ -3,5 +3,5 @@ App.Strategy.Elevator.Random = function(elevator) {
 }
 
 App.Strategy.Elevator.Random.prototype.ready = function() {
-  this.elevator.target = Math.floor(Math.random() * this.elevator.building.numFloors);
+  this.elevator.target = App.Utils.randInt(0, this.elevator.building.numFloors);
 }

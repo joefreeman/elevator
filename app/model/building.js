@@ -4,10 +4,10 @@ App.Model.Building = function(config) {
   this.numFloors = config.numFloors;
   this.floorHeight = config.floorHeight || 40;
   this.elevator = new App.Model.Elevator({
-    floor: Math.floor(Math.random() * config.numFloors),
+    floor: App.Utils.randInt(0, config.numFloors),
     capacity: 5,
     building: this,
-    speed: Math.random() * 0.0005 + 0.0015
+    speed: App.Utils.randFloat(0.0015, 0.002)
   });
 }
 
