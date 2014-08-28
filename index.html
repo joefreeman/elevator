@@ -27,24 +27,24 @@
     var buildings = [];
     for (var i = 0; i < 8; i++) {
       buildings.push(new App.Model.Building({
-        numFloors: Math.floor(Math.random() * 8) + 2,
-        width: Math.floor(Math.random() * 100) + 70,
-        floorHeight: Math.floor(Math.random() * 25) + 30
+        numFloors: App.Utils.randInt(2, 10),
+        width: App.Utils.randInt(70, 170),
+        floorHeight: App.Utils.randInt(30, 55)
       }));
     }
     var randomTarget = function() {
-      var building = buildings[Math.floor(Math.random() * buildings.length)];
+      var building = App.Utils.randItem(buildings);
       return {
-        offset: Math.floor(Math.random() * building.width),
+        offset: App.Utils.randInt(0, building.width),
         building: building,
-        floor: Math.floor(Math.random() * building.numFloors)
+        floor: App.Utils.randInt(0, building.numFloors)
       };
     }
     var randomPerson = function() {
       return new App.Model.Person({
-        speed: (Math.random() * 0.09) + 0.01,
+        speed: App.Utils.randFloat(0.01, 0.1),
         position: {
-          offset: Math.random() * $(window).width()
+          offset: App.Utils.randFloat(0, $(window).width())
         },
         target: randomTarget(),
         callback: function(person) {
