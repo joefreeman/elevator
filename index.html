@@ -69,16 +69,7 @@
       elevator.strategy = new App.Strategy.Elevator.Dumb(elevator);
     }
 
-    var lastUpdateTime = Date.now();
-    setInterval(function() {
-      if (window.running) {
-        var startTime = Date.now();
-        world.tick(startTime - lastUpdateTime);
-        lastUpdateTime = startTime;
-      }
-    }, 50);
-
-    window.running = true;
+    window.eventLoop = App.Utils.runEventLoop(world.tick, 50);
     window.world = world;
   </script>
 </body>
