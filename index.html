@@ -35,7 +35,7 @@
     var randomTarget = function() {
       var building = App.Utils.randItem(buildings);
       return {
-        offset: App.Utils.randInt(0, building.width),
+        offset: App.Utils.randInt(40, building.width - 10),
         building: building,
         floor: App.Utils.randInt(0, building.numFloors)
       };
