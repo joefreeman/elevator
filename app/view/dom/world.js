@@ -159,12 +159,13 @@ var updatePersonPosition = function(personEl, targetEl, directionEl, person, wor
     left: targetLeft,
     bottom: targetBottom
   });
+  var directionClass = 'direction-' + (targetMiddle > personBottom ? 'n' : 's') + (targetLeft > personLeft ? 'e' : 'w');
   directionEl.css({
     left: Math.min(personLeft, targetLeft),
     bottom: Math.min(personBottom, targetMiddle),
     width: Math.abs(personLeft - targetLeft),
     height: Math.abs(personBottom - targetMiddle)
-  }).removeClass('direction-ne direction-sw direction-nw direction-se').addClass('direction-' + (targetMiddle > personBottom ? 'n' : 's') + (targetLeft > personLeft ? 'e' : 'w'));
+  }).removeClass('direction-ne direction-sw direction-nw direction-se').addClass(directionClass);
 }
 
 var renderPerson = function(person, world, worldEl) {
