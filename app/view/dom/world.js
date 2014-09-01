@@ -150,6 +150,7 @@ var updatePersonPosition = function(personEl, targetEl, directionEl, person, wor
   var personBottom = getWorldBottom(person.position);
   var targetLeft = getWorldLeft(person.target, world) + WORLD_PADDING;
   var targetBottom = getWorldBottom(person.target) + 1;
+  var targetMiddle = targetBottom + 3;
   personEl.css({
     left: personLeft,
     bottom: personBottom
@@ -160,10 +161,10 @@ var updatePersonPosition = function(personEl, targetEl, directionEl, person, wor
   });
   directionEl.css({
     left: Math.min(personLeft, targetLeft),
-    bottom: Math.min(personBottom, targetBottom),
+    bottom: Math.min(personBottom, targetMiddle),
     width: Math.abs(personLeft - targetLeft),
-    height: Math.abs(personBottom - targetBottom)
-  }).removeClass('direction-ne direction-sw direction-nw direction-se').addClass('direction-' + (targetBottom > personBottom ? 'n' : 's') + (targetLeft > personLeft ? 'e' : 'w'));
+    height: Math.abs(personBottom - targetMiddle)
+  }).removeClass('direction-ne direction-sw direction-nw direction-se').addClass('direction-' + (targetMiddle > personBottom ? 'n' : 's') + (targetLeft > personLeft ? 'e' : 'w'));
 }
 
 var renderPerson = function(person, world, worldEl) {
