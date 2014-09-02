@@ -9,7 +9,7 @@ App.View.Dom.World = function(model, container) {
   this.container = container;
 }
 
-var updateElevatorPosition = function(elevatorEl, leftDoorEl, rightDoorEl, elevator) {
+var updateElevator = function(elevatorEl, leftDoorEl, rightDoorEl, elevator) {
   var floorHeight = elevator.building.floorHeight;
   elevatorEl.css('top', elevator.building.numFloors * floorHeight - Math.floor(elevator.floor * floorHeight) - floorHeight);
   var doorWidth = (SHAFT_WIDTH / 2) * (1 - elevator.getDoorPosition());
@@ -102,9 +102,9 @@ var renderBuilding = function(building, buildings, worldEl, containerEl) {
   });
   var leftDoorEl = $('<div>').addClass('door');
   var rightDoorEl = $('<div>').addClass('door');
-  updateElevatorPosition(elevatorEl, leftDoorEl, rightDoorEl, building.elevator);
+  updateElevator(elevatorEl, leftDoorEl, rightDoorEl, building.elevator);
   building.elevator.observable.bind('moved', function() {
-    updateElevatorPosition(elevatorEl, leftDoorEl, rightDoorEl, building.elevator);
+    updateElevator(elevatorEl, leftDoorEl, rightDoorEl, building.elevator);
   });
   elevatorEl.append(leftDoorEl, rightDoorEl);
   shaftEl.append(elevatorEl);
@@ -145,7 +145,7 @@ var getWorldBottom = function(position) {
   }
 }
 
-var updatePersonPosition = function(personEl, targetEl, directionEl, person, world) {
+var updatePerson = function(personEl, targetEl, directionEl, person, world) {
   var personLeft = getWorldLeft(person.position, world) + WORLD_PADDING;
   var personBottom = getWorldBottom(person.position);
   var targetLeft = getWorldLeft(person.target, world) + WORLD_PADDING;
@@ -173,9 +173,9 @@ var renderPerson = function(person, world, worldEl) {
   var targetEl = $('<div>').addClass('target');
   var directionEl = $('<div>').addClass('direction');
   person.observable.bind('moved', function() {
-    updatePersonPosition(personEl, targetEl, directionEl, person, world);
+    updatePerson(personEl, targetEl, directionEl, person, world);
   });
-  updatePersonPosition(personEl, targetEl, directionEl, person, world);
+  updatePerson(personEl, targetEl, directionEl, person, world);
   worldEl.append(personEl, targetEl, directionEl);
 }
 
