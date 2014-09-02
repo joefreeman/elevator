@@ -128,6 +128,10 @@ a {
   z-index: 3;
 }
 
+.person.inside {
+  background: #CCF;
+}
+
 .target {
   height: 6px;
   width: 6px;

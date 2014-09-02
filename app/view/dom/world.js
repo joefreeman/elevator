@@ -154,7 +154,7 @@ var updatePerson = function(personEl, targetEl, directionEl, person, world) {
   personEl.css({
     left: personLeft,
     bottom: personBottom
-  });
+  }).removeClass('inside outside').addClass(person.position.building ? 'inside' : 'outside');
   targetEl.css({
     left: targetLeft,
     bottom: targetBottom
