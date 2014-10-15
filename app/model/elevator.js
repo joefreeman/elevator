@@ -7,7 +7,7 @@ App.Model.Elevator = function(config) {
   this.target = config.floor || 0;
   this.capacity = config.capacity || 5;
   this.speed = config.speed || 0.001;
-  this.strategy = null;
+  this.strategy = config.strategy;
   this.doors = {position: -1, opening: false};
   this.passengers = [];
   this.queue = [];
@@ -50,7 +50,7 @@ App.Model.Elevator.prototype.tick = function(elapsedTime) {
       // TODO: remove floor from queue (if direction matches?)
       // this.queue = this.queue.filter(function(item) { return  })
       if (this.strategy && this.strategy.ready) {
-        this.strategy.ready();
+        this.strategy.ready(this);
       }
     } else {
       if (this.doors.opening) {

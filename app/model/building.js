@@ -9,7 +9,8 @@ App.Model.Building = function(config) {
     floor: App.Utils.randInt(0, config.numFloors),
     capacity: 5,
     building: this,
-    speed: App.Utils.randFloat(0.0015, 0.002)
+    speed: App.Utils.randFloat(0.0015, 0.002),
+    strategy: config.elevatorStrategy
   });
 }
 

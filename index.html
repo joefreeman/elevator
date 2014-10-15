@@ -24,14 +24,18 @@
   <script src="app/view/dom/world.js"></script>
 
   <script>
+    var dumbElevatorStrategy = new App.Strategy.Elevator.Dumb();
+
     var buildings = [];
     for (var i = 0; i < 8; i++) {
       buildings.push(new App.Model.Building({
         numFloors: App.Utils.randInt(2, 10),
         width: App.Utils.randInt(70, 170),
-        floorHeight: App.Utils.randInt(30, 55)
+        floorHeight: App.Utils.randInt(30, 55),
+        elevatorStrategy: dumbElevatorStrategy
       }));
     }
+
     var randomTarget = function() {
       var building = App.Utils.randItem(buildings);
       return {
@@ -40,6 +44,7 @@
         floor: App.Utils.randInt(0, building.numFloors)
       };
     }
+
     var randomPerson = function() {
       return new App.Model.Person({
         speed: App.Utils.randFloat(0.01, 0.1),
@@ -52,10 +57,12 @@
         }
       });
     }
+
     var people = [];
     for (var i = 0; i < 10; i++) {
       people.push(randomPerson());
     }
+
     var world = new App.Model.World({
       buildings: buildings,
       people: people
@@ -63,11 +70,6 @@
 
     var view = new App.View.Dom.World(world, $('.container'));
     view.render();
-
-    for (var i = 0; i < world.buildings.length; i++) {
-      var elevator = world.buildings[i].elevator;
-      elevator.strategy = new App.Strategy.Elevator.Dumb(elevator);
-    }
 
     window.eventLoop = App.Utils.runEventLoop(world.tick, 50);
     window.world = world;
